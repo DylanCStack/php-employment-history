@@ -1,0 +1,16 @@
+<html>
+<head>
+    <title>Your employment history</title>
+</head>
+<body>
+    <h1>You made an entry:</h1>
+
+    <ul>
+        <li>{{ job.getTitle }}</li>
+        <li>{{ job.getDuration }}</li>
+        <li>{{ job.getAdvancement }} promotions</li>
+        <li>{{ job.getDeparture }}</li>
+    </ul>
+    <p><a href="/jobs">Home</a></p>
+</body>
+</html>

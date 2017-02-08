@@ -1,6 +1,6 @@
 <?php
-    require_once __DIR__."/../vendor/autoload.php";
-    require_once __DIR__."/../src/Job.php";
+    require_once __DIR__ . "/../vendor/autoload.php";
+    require_once __DIR__ . "/../src/Job.php";
 
     session_start();
     if (empty($_SESSION['list_of_jobs'])) {
@@ -14,7 +14,19 @@
     ));
 
     $app->get("/", function() use ($app) {
-        return "sample root page for past jobs";
+        return $app['twig']->render("jobs.html.twig", array( 'jobs' => Job::getAll() ));
+    });
+
+    $app->post("/jobs", function() use ($app) {
+        $job = new Job($_POST["title"], $_POST["duration"], $_POST["advancement"], $_POST["departure"]);
+        $job->save();
+
+        return $app['twig']->render('create_job.html.twig', array( 'newjob' => $job ));
+    });
+
+    $app->post("/delete_jobs", function() use ($app) {
+        Job::deleteAll();
+        return $app['twig']->render('delete_jobs.html.twig');
     });
 
 

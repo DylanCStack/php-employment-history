@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <title>Your employment history</title>
+    </head>
+    <body>
+        <h1>Your employment history</h1>
+
+        {% if jobs is not empty %}
+            <p>Here are all your past jobs:</p>
+            <ul>
+                {% for job in jobs %}
+                    <li>{{ job.getTitle }}
+                        <ul>
+                            <li>{{ job.getDuration }}</li>
+                            <li>{{ job.getAdvancement }} promotions</li>
+                            <li>{{ job.getDeparture }}</li>
+                        </ul>
+                    </li>
+                {% endfor %}
+            </ul>
+        {% endif %}
+
+        <form action='/jobs' method='post'>
+            <label for='title'>Job title</label>
+            <input id='title' name='title' type='text'>
+
+            <label for='duration'>Job duration</label>
+            <input id='duration' name='duration' type='text'>
+
+            <label for='advancement'>Number of promotions</label>
+            <input id='advancement' name='advancement' type='number'>
+
+            <label for='departure'>How/why your employment ended</label>
+            <input id='departure' name='departure' type='text'>
+
+            <button type='submit'>Add job</button>
+        </form>
+        <form action='/delete_jobs' method='post'>
+            <button type='submit'>Clear</button>
+        </form>
+    </body>
+</html>
